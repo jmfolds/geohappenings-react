@@ -3,12 +3,23 @@ import 'bootstrap/dist/js/bootstrap.js';
 import template from './app.html';
 import MapView from './Components/Map/map.jsx';
 import AboutView from './Components/About/About.jsx';
-import Hello from './hello.jsx';
+import Happenings from './Components/Happenings/Happenings.jsx';
 import React from 'react';
 import { render } from 'react-dom';
 
 class application {
     constructor(opts) {
+        const firebase = require("firebase/app");
+
+        const config = {
+            apiKey: "AIzaSyCPHiXRpGNUFv9LNhfZ1fGFjQnsC6cRACE",
+            authDomain: "luminous-fire-5575.firebaseapp.com",
+            databaseURL: "https://luminous-fire-5575.firebaseio.com",
+            projectId: "luminous-fire-5575",
+            storageBucket: "luminous-fire-5575.appspot.com",
+            messagingSenderId: "1001797472035"
+        };
+        firebase.initializeApp(config);
         this.rootView = document.getElementById('app-container').innerHTML = template;
         this.MapView = render(
             <MapView />,
@@ -18,15 +29,10 @@ class application {
             <AboutView />,
             document.getElementById('modal-container')
         );
-        this.MapView.map.on('zoomend', (e) => {
-            console.info(e);
-        });
-    }
-    sayHello(name) {
-        return render(
-            <Hello name={name}/>,
-            document.getElementById('hello')
-        )
+        this.happeningsList = render(
+            <Happenings />,
+            document.getElementById('modal-container')
+        );
     }
 }
 
