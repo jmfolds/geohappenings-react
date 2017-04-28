@@ -49,7 +49,7 @@ module.exports = {
     plugins: [
         new ExtractTextPlugin('[name].css'),
         new HtmlWebpackPlugin({
-            template: 'index.html'
+            template: 'src/index.html'
         }),
         new WebpackNotifierPlugin(),
         // set globals
